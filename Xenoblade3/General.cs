@@ -13,5 +13,11 @@ namespace Xenoblade3
 			get => SaveData.Instance().ReadNumber(0x20, 4);
 			set => Util.WriteNumber(0x20, 4, 0, 99999999, value);
 		}
+
+		public uint Ether
+		{
+			get => SaveData.Instance().ReadNumber(0x53CAC, 1);
+			set => Util.WriteNumber(0x53CAC, 1, 0, 99, value);
+		}
 	}
 }

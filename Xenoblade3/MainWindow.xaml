@@ -34,7 +34,8 @@
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition/>
-						<RowDefinition Height="12*"/>
+						<RowDefinition/>
+						<RowDefinition Height="11*"/>
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition/>
@@ -45,6 +46,8 @@
 					</Grid.ColumnDefinitions>
 					<Label Content="Money"/>
 					<TextBox Grid.Column="1" Text="{Binding General.Money, UpdateSourceTrigger=PropertyChanged}"/>
+					<Label Grid.Row="1" Content="Ether"/>
+					<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding General.Ether, UpdateSourceTrigger=PropertyChanged}"/>
 				</Grid>
 			</TabItem>
 			<TabItem Header="Character">
