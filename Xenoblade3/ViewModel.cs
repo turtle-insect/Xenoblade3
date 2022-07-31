@@ -12,8 +12,11 @@ namespace Xenoblade3
 	{
 		public General General { get; private set; } = new General();
 		public ObservableCollection<Character> Characters { get; private set; } = new ObservableCollection<Character>();
-		public ObservableCollection<Item> Collections { get; private set; } = new ObservableCollection<Item>();
+		public ObservableCollection<Item> Collectibles { get; private set; } = new ObservableCollection<Item>();
 		public ObservableCollection<Item> Accessories { get; private set; } = new ObservableCollection<Item>();
+		public ObservableCollection<Item> Gems { get; private set; } = new ObservableCollection<Item>();
+		public ObservableCollection<Item> KeyItems { get; private set; } = new ObservableCollection<Item>();
+		public ObservableCollection<Item> PinnedItems { get; private set; } = new ObservableCollection<Item>();
 		public CommandAction FileOpenCommand { get; private set; }
 		public CommandAction FileSaveCommand { get; private set; }
 
@@ -28,8 +31,11 @@ namespace Xenoblade3
 		private void Init()
 		{
 			Characters.Clear();
-			Collections.Clear();
+			Collectibles.Clear();
 			Accessories.Clear();
+			Gems.Clear();
+			KeyItems.Clear();
+			PinnedItems.Clear();
 
 			for (uint i = 0; i < 8; i++)
 			{
@@ -41,7 +47,31 @@ namespace Xenoblade3
 				var item = new Item(0x55060 + 16 * i);
 				if (item.ID == 0) continue;
 
-				Collections.Add(item);
+				Collectibles.Add(item);
+			}
+
+			for (uint i = 0; i < 1500; i++)
+			{
+				var item = new Item(0x5E020 + 16 * i);
+				if (item.ID == 0) continue;
+
+				Accessories.Add(item);
+			}
+
+			for (uint i = 0; i < 300; i++)
+			{
+				var item = new Item(0x53DA0 + 16 * i);
+				if (item.ID == 0) continue;
+
+				Gems.Add(item);
+			}
+
+			for (uint i = 0; i < 280; i++)
+			{
+				var item = new Item(0x63DE0 + 16 * i);
+				if (item.ID == 0) continue;
+
+				KeyItems.Add(item);
 			}
 
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(General)));
