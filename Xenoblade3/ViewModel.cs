@@ -10,6 +10,7 @@ namespace Xenoblade3
 {
 	internal class ViewModel : INotifyPropertyChanged
 	{
+		public Info Info { get; set; } = Info.Instance();
 		public General General { get; private set; } = new General();
 		public ObservableCollection<Character> Characters { get; private set; } = new ObservableCollection<Character>();
 		public ObservableCollection<Item> Collectibles { get; private set; } = new ObservableCollection<Item>();
@@ -19,11 +20,13 @@ namespace Xenoblade3
 		public ObservableCollection<Item> PinnedItems { get; private set; } = new ObservableCollection<Item>();
 		public CommandAction FileOpenCommand { get; private set; }
 		public CommandAction FileSaveCommand { get; private set; }
+		public CommandAction ChoiceItemCommand { get; private set; }
 
 		public ViewModel()
 		{
 			FileOpenCommand = new CommandAction(FileOpen);
 			FileSaveCommand = new CommandAction(FileSave);
+			ChoiceItemCommand = new CommandAction(ChoiceItem);
 		}
 
 		public event PropertyChangedEventHandler? PropertyChanged;
@@ -89,6 +92,18 @@ namespace Xenoblade3
 		private void FileSave(Object? obj)
 		{
 			SaveData.Instance().Save();
+		}
+
+		private void ChoiceItem(Object? obj)
+		{
+			if(obj == null) return;
+			var item = obj as Item;
+			if (item == null) return;
+
+			var dlg = new ChoiceWindow();
+			dlg.ID = item.ID;
+			dlg.ShowDialog();
+			item.ID = dlg.ID;
 		}
 	}
 }

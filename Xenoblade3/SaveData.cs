@@ -9,8 +9,8 @@ namespace Xenoblade3
 	internal class SaveData
 	{
 		private static SaveData mThis = new SaveData();
-		private String mFileName = null;
-		private Byte[] mBuffer = null;
+		private String mFileName = "";
+		private Byte[]? mBuffer = null;
 		private readonly System.Text.Encoding mEncode = System.Text.Encoding.UTF8;
 		public uint Adventure { private get; set; } = 0;
 
@@ -49,13 +49,15 @@ namespace Xenoblade3
 
 		public void Import(String filename)
 		{
-			if (mFileName == null) return;
+			if (mFileName == null || mBuffer == null) return;
 
 			mBuffer = System.IO.File.ReadAllBytes(filename);
 		}
 
 		public void Export(String filename)
 		{
+			if (mFileName == null || mBuffer == null) return;
+
 			System.IO.File.WriteAllBytes(filename, mBuffer);
 		}
 
@@ -192,6 +194,8 @@ namespace Xenoblade3
 		public List<uint> FindAddress(String name, uint index)
 		{
 			List<uint> result = new List<uint>();
+			if (mBuffer == null) return result;
+
 			for (; index < mBuffer.Length; index++)
 			{
 				if (mBuffer[index] != name[0]) continue;

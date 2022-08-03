@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Xenoblade3
 {
-	internal class Item
+	internal class Item : INotifyPropertyChanged
 	{
+		public event PropertyChangedEventHandler? PropertyChanged;
 		private readonly uint mAddress;
 
 		public Item(uint address)
@@ -18,7 +20,11 @@ namespace Xenoblade3
 		public uint ID
 		{
 			get => SaveData.Instance().ReadNumber(mAddress, 2);
-			set => SaveData.Instance().WriteNumber(mAddress, 2, value);
+			set
+			{
+				SaveData.Instance().WriteNumber(mAddress, 2, value);
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ID)));
+			}
 		}
 
 		public uint Index

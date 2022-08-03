@@ -13,6 +13,7 @@
 	<Window.Resources>
 		<BitmapImage x:Key="open" UriSource="./resource/open.png"/>
 		<BitmapImage x:Key="save" UriSource="./resource/save.png"/>
+		<local:ItemIDConverter x:Key="ItemIDConverter"/>
 	</Window.Resources>
 	<DockPanel>
 		<Menu DockPanel.Dock="Top">
@@ -108,10 +109,10 @@
 							<ListBox.ItemTemplate>
 								<DataTemplate>
 									<StackPanel Orientation="Horizontal">
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 										<Label Content="Count"/>
 										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+										<Label Content="ID"/>
+										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 									</StackPanel>
 								</DataTemplate>
 							</ListBox.ItemTemplate>
@@ -122,10 +123,14 @@
 							<ListBox.ItemTemplate>
 								<DataTemplate>
 									<StackPanel Orientation="Horizontal">
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 										<Label Content="Count"/>
 										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+										<Button Margin="5,0,5,0" Content=" ... "
+												Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceItemCommand}"
+												CommandParameter="{Binding}"/>
+										<Label Content="ID"/>
+										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+										<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
 									</StackPanel>
 								</DataTemplate>
 							</ListBox.ItemTemplate>
@@ -136,10 +141,10 @@
 							<ListBox.ItemTemplate>
 								<DataTemplate>
 									<StackPanel Orientation="Horizontal">
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 										<Label Content="Count"/>
 										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+										<Label Content="ID"/>
+										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 									</StackPanel>
 								</DataTemplate>
 							</ListBox.ItemTemplate>
@@ -150,10 +155,10 @@
 							<ListBox.ItemTemplate>
 								<DataTemplate>
 									<StackPanel Orientation="Horizontal">
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 										<Label Content="Count"/>
 										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+										<Label Content="ID"/>
+										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 									</StackPanel>
 								</DataTemplate>
 							</ListBox.ItemTemplate>
@@ -164,10 +169,10 @@
 							<ListBox.ItemTemplate>
 								<DataTemplate>
 									<StackPanel Orientation="Horizontal">
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 										<Label Content="Count"/>
 										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+										<Label Content="ID"/>
+										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
 									</StackPanel>
 								</DataTemplate>
 							</ListBox.ItemTemplate>
