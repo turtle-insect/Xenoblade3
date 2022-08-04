@@ -50,7 +50,7 @@ namespace Xenoblade3
 
 			for (uint i = 0; i < 8; i++)
 			{
-				Characters.Add(new Character(0xE3A0 + 8888 * i));
+				Characters.Add(new Character(0xE3A0 + 4444 * i));
 			}
 
 			for (uint i = 0; i < 2300; i++)
