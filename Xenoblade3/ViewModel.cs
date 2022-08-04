@@ -20,13 +20,21 @@ namespace Xenoblade3
 		public ObservableCollection<Item> PinnedItems { get; private set; } = new ObservableCollection<Item>();
 		public CommandAction FileOpenCommand { get; private set; }
 		public CommandAction FileSaveCommand { get; private set; }
-		public CommandAction ChoiceItemCommand { get; private set; }
+		public CommandAction ChoiceAccessoriesCommand { get; private set; }
+		public CommandAction ChoiceCollectiblesCommand { get; private set; }
+		public CommandAction ChoiceGemsCommand { get; private set; }
+		public CommandAction ChoiceKeyItemsCommand { get; private set; }
+		public CommandAction ChoicePinnedItemsCommand { get; private set; }
 
 		public ViewModel()
 		{
 			FileOpenCommand = new CommandAction(FileOpen);
 			FileSaveCommand = new CommandAction(FileSave);
-			ChoiceItemCommand = new CommandAction(ChoiceItem);
+			ChoiceAccessoriesCommand = new CommandAction(ChoiceAccessories);
+			ChoiceCollectiblesCommand = new CommandAction(ChoiceCollectibles);
+			ChoiceGemsCommand = new CommandAction(ChoiceGems);
+			ChoiceKeyItemsCommand = new CommandAction(ChoiceKeyItems);
+			ChoicePinnedItemsCommand = new CommandAction(ChoicePinnedItems);
 		}
 
 		public event PropertyChangedEventHandler? PropertyChanged;
@@ -94,13 +102,39 @@ namespace Xenoblade3
 			SaveData.Instance().Save();
 		}
 
-		private void ChoiceItem(Object? obj)
+		private void ChoiceAccessories(Object? obj)
 		{
-			if(obj == null) return;
+			ChoiceItem(obj, ChoiceWindow.ItemType.eAccessories);
+		}
+
+		private void ChoiceCollectibles(Object? obj)
+		{
+			ChoiceItem(obj, ChoiceWindow.ItemType.eCollectibles);
+		}
+
+		private void ChoiceGems(Object? obj)
+		{
+			ChoiceItem(obj, ChoiceWindow.ItemType.eGems);
+		}
+
+		private void ChoiceKeyItems(Object? obj)
+		{
+			ChoiceItem(obj, ChoiceWindow.ItemType.eKeyItems);
+		}
+
+		private void ChoicePinnedItems(Object? obj)
+		{
+			ChoiceItem(obj, ChoiceWindow.ItemType.ePinnedItems);
+		}
+
+		private void ChoiceItem(Object? obj, ChoiceWindow.ItemType type)
+		{
+			if (obj == null) return;
 			var item = obj as Item;
 			if (item == null) return;
 
 			var dlg = new ChoiceWindow();
+			dlg.Type = type;
 			dlg.ID = item.ID;
 			dlg.ShowDialog();
 			item.ID = dlg.ID;

@@ -10,6 +10,11 @@ namespace Xenoblade3
 	{
 		private static Info mThis;
 		public List<NameValueInfo> Item { get; private set; } = new List<NameValueInfo>();
+		public List<NameValueInfo> Collectibles { get; private set; } = new List<NameValueInfo>();
+		public List<NameValueInfo> Accessories { get; private set; } = new List<NameValueInfo>();
+		public List<NameValueInfo> Gems { get; private set; } = new List<NameValueInfo>();
+		public List<NameValueInfo> KeyItems { get; private set; } = new List<NameValueInfo>();
+		public List<NameValueInfo> PinnedItems { get; private set; } = new List<NameValueInfo>();
 
 		private Info() { }
 
@@ -40,7 +45,17 @@ namespace Xenoblade3
 
 		private void Init()
 		{
-			AppendList("info\\item.txt", Item);
+			AppendList("info\\accessories.txt", Accessories);
+			AppendList("info\\collectibles.txt", Collectibles);
+			AppendList("info\\gems.txt", Gems);
+			AppendList("info\\keyItems.txt", KeyItems);
+			AppendList("info\\pinnedItems.txt", PinnedItems);
+
+			AppendList("info\\accessories.txt", Item);
+			AppendList("info\\collectibles.txt", Item);
+			AppendList("info\\gems.txt", Item);
+			AppendList("info\\keyItems.txt", Item);
+			AppendList("info\\pinnedItems.txt", Item);
 		}
 
 		private void AppendList<Type>(String filename, List<Type> items)

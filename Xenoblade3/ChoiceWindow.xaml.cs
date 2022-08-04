@@ -19,7 +19,17 @@ namespace Xenoblade3
 	/// </summary>
 	public partial class ChoiceWindow : Window
 	{
-		public uint ID { get; set; }
+		public uint ID { get; set; } = 0;
+		public ItemType Type { get; set; } = ItemType.eAccessories;
+
+		public enum ItemType
+		{
+			eCollectibles,
+			eAccessories,
+			eGems,
+			eKeyItems,
+			ePinnedItems,
+		}
 
 		public ChoiceWindow()
 		{
@@ -64,7 +74,11 @@ namespace Xenoblade3
 		private void CreateItemList(String filter)
 		{
 			ListBoxItem.Items.Clear();
-			var items = Info.Instance().Item;
+			var items = Info.Instance().Accessories;
+			if(Type == ItemType.eCollectibles) items = Info.Instance().Collectibles;
+			else if (Type == ItemType.eGems) items = Info.Instance().Gems;
+			else if (Type == ItemType.eKeyItems) items = Info.Instance().KeyItems;
+			else if (Type == ItemType.ePinnedItems) items = Info.Instance().PinnedItems;
 
 			foreach (var item in items)
 			{
