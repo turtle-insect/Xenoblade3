@@ -34,5 +34,11 @@ namespace Xenoblade3
 			get => SaveData.Instance().ReadNumber(mAddress + 4, 4);
 			set => Util.WriteNumber(mAddress + 4, 4, 0, 99999999, value);
 		}
+
+		public uint SP
+		{
+			get => SaveData.Instance().ReadNumber(mAddress + 8, 4);
+			set => Util.WriteNumber(mAddress + 8, 4, 0, 99999999, value);
+		}
 	}
 }

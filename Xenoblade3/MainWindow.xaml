@@ -63,7 +63,8 @@
 						<Grid.RowDefinitions>
 							<RowDefinition/>
 							<RowDefinition/>
-							<RowDefinition Height="11*"/>
+							<RowDefinition/>
+							<RowDefinition Height="10*"/>
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition/>
@@ -73,6 +74,8 @@
 						<Label Grid.Column="1" Content="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Lv}"/>
 						<Label Grid.Row="1" Content="Exp"/>
 						<TextBox Grid.Row="1" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.Exp, UpdateSourceTrigger=PropertyChanged}"/>
+						<Label Grid.Row="2" Content="SP"/>
+						<TextBox Grid.Row="2" Grid.Column="1" Text="{Binding ElementName=ListBoxCharacter, Path=SelectedItem.SP, UpdateSourceTrigger=PropertyChanged}"/>
 					</Grid>
 					<TabControl Grid.Column="2">
 						<TabItem Header="Class">
