@@ -91,6 +91,7 @@ namespace Xenoblade3
 		private void FileOpen(Object? obj)
 		{
 			var dlg = new Microsoft.Win32.OpenFileDialog();
+			dlg.Filter = "sav|bf3game*.sav";
 			if (dlg.ShowDialog() == false) return;
 
 			SaveData.Instance().Open(dlg.FileName);
