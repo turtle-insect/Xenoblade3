@@ -108,94 +108,109 @@
 			<TabItem Header="Item">
 				<TabControl>
 					<TabItem Header="Collectibles">
-						<ListBox ItemsSource="{Binding Collectibles}">
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<StackPanel Orientation="Horizontal">
-										<Label Content="Count"/>
-										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Button Margin="5,0,5,0" Content=" ... "
+						<DockPanel>
+							<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding ChoiceCollectiblesCommand}"/>
+							<ListBox ItemsSource="{Binding Collectibles}">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<Label Content="Count"/>
+											<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Button Margin="5,0,5,0" Content=" ... "
 												Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceCollectiblesCommand}"
 												CommandParameter="{Binding}"/>
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
-									</StackPanel>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
+											<Label Content="ID"/>
+											<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
+										</StackPanel>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</DockPanel>
 					</TabItem>
 					<TabItem Header="Accessories">
-						<ListBox ItemsSource="{Binding Accessories}">
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<StackPanel Orientation="Horizontal">
-										<Label Content="Count"/>
-										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Button Margin="5,0,5,0" Content=" ... "
+						<DockPanel>
+							<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding AppendAccessoriesCommand}"/>
+							<ListBox ItemsSource="{Binding Accessories}">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<Label Content="Count"/>
+											<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Button Margin="5,0,5,0" Content=" ... "
 												Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceAccessoriesCommand}"
 												CommandParameter="{Binding}"/>
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
-									</StackPanel>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
+											<Label Content="ID"/>
+											<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
+										</StackPanel>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</DockPanel>
 					</TabItem>
 					<TabItem Header="Gems">
-						<ListBox ItemsSource="{Binding Gems}">
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<StackPanel Orientation="Horizontal">
-										<Label Content="Count"/>
-										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Button Margin="5,0,5,0" Content=" ... "
+						<DockPanel>
+							<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding ChoiceGemsCommand}"/>
+							<ListBox ItemsSource="{Binding Gems}">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<Label Content="Count"/>
+											<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Button Margin="5,0,5,0" Content=" ... "
 												Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceGemsCommand}"
 												CommandParameter="{Binding}"/>
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
-									</StackPanel>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
+											<Label Content="ID"/>
+											<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
+										</StackPanel>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</DockPanel>
 					</TabItem>
 					<TabItem Header="KeyItems">
-						<ListBox ItemsSource="{Binding KeyItems}">
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<StackPanel Orientation="Horizontal">
-										<Label Content="Count"/>
-										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Button Margin="5,0,5,0" Content=" ... "
+						<DockPanel>
+							<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding ChoiceKeyItemsCommand}"/>
+							<ListBox ItemsSource="{Binding KeyItems}">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<Label Content="Count"/>
+											<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Button Margin="5,0,5,0" Content=" ... "
 												Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoiceKeyItemsCommand}"
 												CommandParameter="{Binding}"/>
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
-									</StackPanel>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
+											<Label Content="ID"/>
+											<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
+										</StackPanel>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</DockPanel>
 					</TabItem>
 					<TabItem Header="PinnedItems">
-						<ListBox ItemsSource="{Binding PinnedItems}">
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<StackPanel Orientation="Horizontal">
-										<Label Content="Count"/>
-										<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Button Margin="5,0,5,0" Content=" ... "
+						<DockPanel>
+							<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding ChoicePinnedItemsCommand}"/>
+							<ListBox ItemsSource="{Binding PinnedItems}">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<StackPanel Orientation="Horizontal">
+											<Label Content="Count"/>
+											<TextBox Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Button Margin="5,0,5,0" Content=" ... "
 												Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=local:MainWindow}, Path=DataContext.ChoicePinnedItemsCommand}"
 												CommandParameter="{Binding}"/>
-										<Label Content="ID"/>
-										<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
-										<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
-									</StackPanel>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
+											<Label Content="ID"/>
+											<TextBox Text="{Binding ID, UpdateSourceTrigger=PropertyChanged}" Width="80"/>
+											<Label Content="{Binding ID, Converter={StaticResource ItemIDConverter}}"/>
+										</StackPanel>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</DockPanel>
 					</TabItem>
 				</TabControl>
 			</TabItem>

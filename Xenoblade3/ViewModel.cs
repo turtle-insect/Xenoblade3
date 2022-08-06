@@ -21,20 +21,30 @@ namespace Xenoblade3
 		public CommandAction FileOpenCommand { get; private set; }
 		public CommandAction FileSaveCommand { get; private set; }
 		public CommandAction ChoiceAccessoriesCommand { get; private set; }
+		public CommandAction AppendAccessoriesCommand { get; private set; }
 		public CommandAction ChoiceCollectiblesCommand { get; private set; }
 		public CommandAction ChoiceGemsCommand { get; private set; }
 		public CommandAction ChoiceKeyItemsCommand { get; private set; }
 		public CommandAction ChoicePinnedItemsCommand { get; private set; }
+
+		private Dictionary<ChoiceWindow.ItemType, ItemInfo> mItemInfo = new Dictionary<ChoiceWindow.ItemType, ItemInfo>();
 
 		public ViewModel()
 		{
 			FileOpenCommand = new CommandAction(FileOpen);
 			FileSaveCommand = new CommandAction(FileSave);
 			ChoiceAccessoriesCommand = new CommandAction(ChoiceAccessories);
+			AppendAccessoriesCommand = new CommandAction(AppendAccessories);
 			ChoiceCollectiblesCommand = new CommandAction(ChoiceCollectibles);
 			ChoiceGemsCommand = new CommandAction(ChoiceGems);
 			ChoiceKeyItemsCommand = new CommandAction(ChoiceKeyItems);
 			ChoicePinnedItemsCommand = new CommandAction(ChoicePinnedItems);
+
+			mItemInfo.Add(ChoiceWindow.ItemType.eGems, new ItemInfo() { Items = Gems, BaseAddress = 0x53DA0, MaxCount = 300 });
+			mItemInfo.Add(ChoiceWindow.ItemType.eCollectibles, new ItemInfo() { Items = Collectibles, BaseAddress = 0x55060, MaxCount = 2300 });
+			mItemInfo.Add(ChoiceWindow.ItemType.eAccessories, new ItemInfo() { Items = Accessories, BaseAddress = 0x5E020, MaxCount = 1500 });
+			mItemInfo.Add(ChoiceWindow.ItemType.eKeyItems, new ItemInfo() { Items = KeyItems, BaseAddress = 0x63DE0, MaxCount = 280 });
+			mItemInfo.Add(ChoiceWindow.ItemType.ePinnedItems, new ItemInfo() { Items = PinnedItems, BaseAddress = 0x55060, MaxCount = 0 });
 		}
 
 		public event PropertyChangedEventHandler? PropertyChanged;
@@ -53,36 +63,15 @@ namespace Xenoblade3
 				Characters.Add(new Character(0xE3A0 + 4444 * i));
 			}
 
-			for (uint i = 0; i < 2300; i++)
+			foreach(var info in mItemInfo.Values)
 			{
-				var item = new Item(0x55060 + 16 * i);
-				if (item.ID == 0) continue;
+				for(uint index = 0; index < info.MaxCount; index++)
+				{
+					Item item = new Item(info.BaseAddress + 16 * index);
+					if (item.ID == 0) break;
 
-				Collectibles.Add(item);
-			}
-
-			for (uint i = 0; i < 1500; i++)
-			{
-				var item = new Item(0x5E020 + 16 * i);
-				if (item.ID == 0) continue;
-
-				Accessories.Add(item);
-			}
-
-			for (uint i = 0; i < 300; i++)
-			{
-				var item = new Item(0x53DA0 + 16 * i);
-				if (item.ID == 0) continue;
-
-				Gems.Add(item);
-			}
-
-			for (uint i = 0; i < 280; i++)
-			{
-				var item = new Item(0x63DE0 + 16 * i);
-				if (item.ID == 0) continue;
-
-				KeyItems.Add(item);
+					info.Items.Add(item);
+				}
 			}
 
 			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(General)));
@@ -108,9 +97,19 @@ namespace Xenoblade3
 			ChoiceItem(obj, ChoiceWindow.ItemType.eAccessories);
 		}
 
+		private void AppendAccessories(Object? obj)
+		{
+			AppendItem(ChoiceWindow.ItemType.eAccessories);
+		}
+
 		private void ChoiceCollectibles(Object? obj)
 		{
 			ChoiceItem(obj, ChoiceWindow.ItemType.eCollectibles);
+		}
+
+		private void AppendCollectibles(Object? obj)
+		{
+			AppendItem(ChoiceWindow.ItemType.eCollectibles);
 		}
 
 		private void ChoiceGems(Object? obj)
@@ -118,9 +117,19 @@ namespace Xenoblade3
 			ChoiceItem(obj, ChoiceWindow.ItemType.eGems);
 		}
 
+		private void AppendGems(Object? obj)
+		{
+			AppendItem(ChoiceWindow.ItemType.eGems);
+		}
+
 		private void ChoiceKeyItems(Object? obj)
 		{
 			ChoiceItem(obj, ChoiceWindow.ItemType.eKeyItems);
+		}
+
+		private void AppendKeyItems(Object? obj)
+		{
+			AppendItem(ChoiceWindow.ItemType.eKeyItems);
 		}
 
 		private void ChoicePinnedItems(Object? obj)
@@ -139,6 +148,24 @@ namespace Xenoblade3
 			dlg.ID = item.ID;
 			dlg.ShowDialog();
 			item.ID = dlg.ID;
+		}
+
+		private void AppendItem(ChoiceWindow.ItemType type)
+		{
+			var info = mItemInfo[type];
+			if(info == null) return;
+			if (info.Items.Count >= info.MaxCount) return;
+
+			uint index = (uint)info.Items.Count;
+			Item item = new Item(info.BaseAddress + 16 * index);
+			item.Index = index;
+
+			ChoiceItem(item, type);
+			if (item.ID == 0) return;
+			item.Count = 1;
+			item.Confirm = 5;
+			item.Unknown = 5;
+			info.Items.Add(item);
 		}
 	}
 }
