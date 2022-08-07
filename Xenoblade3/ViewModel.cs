@@ -58,7 +58,7 @@ namespace Xenoblade3
 			KeyItems.Clear();
 			PinnedItems.Clear();
 
-			for (uint i = 0; i < 8; i++)
+			for (uint i = 0; i < 30; i++)
 			{
 				Characters.Add(new Character(0xE3A0 + 4444 * i));
 			}
