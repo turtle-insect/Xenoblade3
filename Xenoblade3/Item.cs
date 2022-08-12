@@ -42,7 +42,11 @@ namespace Xenoblade3
 		public uint Count
 		{
 			get => SaveData.Instance().ReadNumber(mAddress + 12, 2);
-			set => Util.WriteNumber(mAddress + 12, 2, 0, 999, value);
+			set
+			{
+				Util.WriteNumber(mAddress + 12, 2, 0, 999, value);
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Count)));
+			}
 		}
 
 		public uint Confirm

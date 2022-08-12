@@ -26,6 +26,7 @@ namespace Xenoblade3
 		public CommandAction ChoiceGemsCommand { get; private set; }
 		public CommandAction ChoiceKeyItemsCommand { get; private set; }
 		public CommandAction ChoicePinnedItemsCommand { get; private set; }
+		public CommandAction AllAdd100CollectiblesCommand { get; private set; }
 
 		private Dictionary<ChoiceWindow.ItemType, ItemInfo> mItemInfo = new Dictionary<ChoiceWindow.ItemType, ItemInfo>();
 
@@ -39,6 +40,7 @@ namespace Xenoblade3
 			ChoiceGemsCommand = new CommandAction(ChoiceGems);
 			ChoiceKeyItemsCommand = new CommandAction(ChoiceKeyItems);
 			ChoicePinnedItemsCommand = new CommandAction(ChoicePinnedItems);
+			AllAdd100CollectiblesCommand = new CommandAction(Add100Collectibles);
 
 			mItemInfo.Add(ChoiceWindow.ItemType.eGems, new ItemInfo() { Items = Gems, BaseAddress = 0x53DA0, MaxCount = 300 });
 			mItemInfo.Add(ChoiceWindow.ItemType.eCollectibles, new ItemInfo() { Items = Collectibles, BaseAddress = 0x55060, MaxCount = 2300 });
@@ -137,6 +139,11 @@ namespace Xenoblade3
 			ChoiceItem(obj, ChoiceWindow.ItemType.ePinnedItems);
 		}
 
+		private void Add100Collectibles(Object? obj)
+		{
+			AddItem(ChoiceWindow.ItemType.eCollectibles, 100);
+		}
+
 		private void ChoiceItem(Object? obj, ChoiceWindow.ItemType type)
 		{
 			if (obj == null) return;
@@ -166,6 +173,16 @@ namespace Xenoblade3
 			item.Confirm = 5;
 			item.Unknown = 5;
 			info.Items.Add(item);
+		}
+
+		private void AddItem(ChoiceWindow.ItemType type, uint count)
+		{
+			var info = mItemInfo[type];
+			if (info == null) return;
+			for (int i = 0; i < info.Items.Count; i++)
+			{
+				info.Items[i].Count += count;
+			}
 		}
 	}
 }
