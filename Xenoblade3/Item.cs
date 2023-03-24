@@ -33,10 +33,10 @@ namespace Xenoblade3
 			set => SaveData.Instance().WriteNumber(mAddress + 2, 2, value);
 		}
 
-		public uint Unknown
+		public uint Category
 		{
-			get => SaveData.Instance().ReadNumber(mAddress + 4, 2);
-			set => SaveData.Instance().WriteNumber(mAddress + 4, 2, value);
+			get => SaveData.Instance().ReadNumber(mAddress + 4, 1);
+			set => SaveData.Instance().WriteNumber(mAddress + 4, 1, value);
 		}
 
 		public uint Count
@@ -49,10 +49,10 @@ namespace Xenoblade3
 			}
 		}
 
-		public uint Confirm
+		public uint Status
 		{
-			get => SaveData.Instance().ReadNumber(mAddress + 14, 2);
-			set => SaveData.Instance().WriteNumber(mAddress + 14, 2, value);
+			get => SaveData.Instance().ReadNumber(mAddress + 14, 1);
+			set => SaveData.Instance().WriteNumber(mAddress + 14, 1, value);
 		}
 	}
 }

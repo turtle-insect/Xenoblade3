@@ -42,10 +42,10 @@ namespace Xenoblade3
 			ChoicePinnedItemsCommand = new CommandAction(ChoicePinnedItems);
 			AllAdd100CollectiblesCommand = new CommandAction(Add100Collectibles);
 
-			mItemInfo.Add(ChoiceWindow.ItemType.eGems, new ItemInfo() { Items = Gems, BaseAddress = 0x53DA0, MaxCount = 300 });
-			mItemInfo.Add(ChoiceWindow.ItemType.eCollectibles, new ItemInfo() { Items = Collectibles, BaseAddress = 0x55060, MaxCount = 2300 });
-			mItemInfo.Add(ChoiceWindow.ItemType.eAccessories, new ItemInfo() { Items = Accessories, BaseAddress = 0x5E020, MaxCount = 1500 });
-			mItemInfo.Add(ChoiceWindow.ItemType.eKeyItems, new ItemInfo() { Items = KeyItems, BaseAddress = 0x63DE0, MaxCount = 280 });
+			mItemInfo.Add(ChoiceWindow.ItemType.eGems, new ItemInfo() { Items = Gems, Category = 5, BaseAddress = 0x53DA0, MaxCount = 300 });
+			mItemInfo.Add(ChoiceWindow.ItemType.eCollectibles, new ItemInfo() { Items = Collectibles, Category = 3, BaseAddress = 0x55060, MaxCount = 2300 });
+			mItemInfo.Add(ChoiceWindow.ItemType.eAccessories, new ItemInfo() { Items = Accessories, Category = 5, BaseAddress = 0x5E020, MaxCount = 1500 });
+			mItemInfo.Add(ChoiceWindow.ItemType.eKeyItems, new ItemInfo() { Items = KeyItems, Category = 7, BaseAddress = 0x63DE0, MaxCount = 280 });
 			mItemInfo.Add(ChoiceWindow.ItemType.ePinnedItems, new ItemInfo() { Items = PinnedItems, BaseAddress = 0x55060, MaxCount = 0 });
 		}
 
@@ -70,7 +70,7 @@ namespace Xenoblade3
 				for(uint index = 0; index < info.MaxCount; index++)
 				{
 					Item item = new Item(info.BaseAddress + 16 * index);
-					if (item.ID == 0) break;
+					if (item.ID == 0) continue;
 
 					info.Items.Add(item);
 				}
@@ -170,8 +170,8 @@ namespace Xenoblade3
 			ChoiceItem(item, type);
 			if (item.ID == 0) return;
 			item.Count = 1;
-			item.Confirm = 5;
-			item.Unknown = 5;
+			item.Status = 5;
+			item.Category = info.Category;
 			info.Items.Add(item);
 		}
 

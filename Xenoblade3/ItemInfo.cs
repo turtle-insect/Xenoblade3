@@ -10,7 +10,8 @@ namespace Xenoblade3
     class ItemInfo
     {
         public ObservableCollection<Item> Items { get; set; }
-        public uint BaseAddress { get; set; }
+		public uint Category { get; set; }
+		public uint BaseAddress { get; set; }
         public uint MaxCount { get; set; }
     }
 }
