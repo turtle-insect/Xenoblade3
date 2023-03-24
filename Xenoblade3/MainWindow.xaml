@@ -110,6 +110,7 @@
 					<TabItem Header="Collectibles">
 						<DockPanel>
 							<Button DockPanel.Dock="Bottom" Content="Append" Command="{Binding ChoiceCollectiblesCommand}"/>
+							<Button DockPanel.Dock="Bottom" Content="All Add 100" Command="{Binding AllAdd100CollectiblesCommand}"/>
 							<ListBox ItemsSource="{Binding Collectibles}">
 								<ListBox.ItemTemplate>
 									<DataTemplate>
